@@ -4,7 +4,18 @@ import sys
 
 import pykka  
 
+""" 
+ Resolve a bunch of IP addresses using a pool of resolvers actors.
+ 
+ Either run without arguments:
+    ./filename.py 
+    
+ Or specify pool size and IPs to resolve:
+   ./filename.py 3 193.35.52.{1,2,3,4,5,6,7,8,9}
+"""
+
 class Resolver(pykka.ThreadingActor):
+    """ The field allow the resolvation of ips address"""
     def resolve(self,ip):
         try:
             info = socket.gethostbyaddr(ip)
